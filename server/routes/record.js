@@ -2,7 +2,7 @@ const express = require("express");
 
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+// The router will be added as a middleware and will take control of requests starting with path /listings.
 const recordRoutes = express.Router();
 
 //This will help us connect to the database
@@ -16,10 +16,13 @@ recordRoutes.route("/listings").get(async function (req, res) {
     .collection("listingsAndReviews")
     .find({}).limit(50)
     .toArray(function (err, result) {
-      if (err) throw err;
-      //result.map let count = await db_connect.collection("matches").count({listing_id : });
-     // if (count > 0)
-      res.json(result);
+      if (err)  { res.status(400); 
+                  res.send("Error fetching lisings!"); }
+      else
+      {
+        
+        res.json(result);
+      }
     });
 });
 
@@ -33,7 +36,8 @@ recordRoutes.route("/listings/recordSwipe").post(function (req, res) {
    direction : req.body.direction
   };
   db_connect.collection("matches").insertOne(myobj, function (err, res) {
-    if (err) throw err;
+    if (err)  { res.status(400); 
+      res.send("Error insert matches!"); }
   });
 });
 
@@ -49,8 +53,12 @@ recordRoutes.route("/listings/updateLike").post(function (req, res) {
   db_connect
     .collection("listingsAndReviews")
     .updateOne(myquery, newvalues, function (err, res) {
-      if (err) throw err;
+      if (err)  { res.status(400); 
+        res.send("Error insert matches!"); }
+    else
+    {
       console.log("1 document updated");
+    }
     });
 });
 
@@ -59,8 +67,12 @@ recordRoutes.route("/listings/delete").delete((req, res) => {
   let db_connect = dbo.getDb("sample_airbnb");
   var myquery = { listing_id: req.body.id };
   db_connect.collection("matches").deleteOne(myquery, function (err, obj) {
-    if (err) throw err;
+  if (err)  { res.status(400); 
+      res.send("Error insert matches!"); }
+  else
+  {
     console.log("1 document deleted");
+  }
   });
 });
 
