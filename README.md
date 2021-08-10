@@ -5,7 +5,6 @@ Example for the article on MongoDB and Express JS web REST API tutorial
 Create an Atlas URI connection parameter in `server/config.env` with your Atlas URI:
 ```
 ATLAS_URI=mongodb+srv://<username>:<password>@sandbox.jadwj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-PORT=3000
 ```
 
 Start Express server:
