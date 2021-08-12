@@ -11,7 +11,6 @@ const dbo = require("../db/conn");
 // This section will help you get a list of all the records.
 recordRoutes.route("/listings").get(async function (req, res) {
   let db_connect = dbo.getDb("sample_airbnb");
-  console.log(req.body.id);
   db_connect
     .collection("listingsAndReviews")
     .find({}).limit(50)
@@ -63,10 +62,10 @@ recordRoutes.route("/listings/updateLike").post(function (req, res) {
 });
 
 // This section will help you delete a record
-recordRoutes.route("/listings/delete").delete((req, res) => {
+recordRoutes.route("/listings/delete/:id").delete((req, res) => {
   let db_connect = dbo.getDb("sample_airbnb");
   var myquery = { listing_id: req.body.id };
-  db_connect.collection("matches").deleteOne(myquery, function (err, obj) {
+  db_connect.collection("listingsAndReviews").deleteOne(myquery, function (err, obj) {
   if (err)  { res.status(400); 
       res.send("Error insert matches!"); }
   else

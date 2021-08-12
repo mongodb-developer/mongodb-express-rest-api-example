@@ -20,7 +20,16 @@ class   App extends Component
   this.setState({
     liked: false
   });
-  await axios.post("http://localhost:5000/listings/recordSwipe", {id : listing_id, session_id : session_id, direction : direction})
+  
+
+  if (direction === "left" )
+  {
+    await axios.delete(`http://localhost:5000/listings/delete/${listing_id}`)
+  }
+  else
+  {
+    await axios.post("http://localhost:5000/listings/recordSwipe", {id : listing_id, session_id : session_id, direction : direction})
+  }
 }
 
 async handleClick(listing_id) {
