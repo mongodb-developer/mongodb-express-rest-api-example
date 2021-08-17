@@ -1,12 +1,12 @@
 
 const { MongoClient } = require("mongodb");
-const Db = process.env.ATLAS_URI;
-const client = new MongoClient(Db, {
+const connectionString = process.env.ATLAS_URI;
+const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-var _db;
+let dbConnection;
 
 module.exports = {
   connectToServer: function (callback) {
@@ -14,6 +14,6 @@ module.exports = {
   },
 
   getDb: function () {
-    return _db;
+    return dbConnection;
   },
 };

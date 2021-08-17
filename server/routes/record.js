@@ -5,12 +5,12 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /listings.
 const recordRoutes = express.Router();
 
-//This will help us connect to the database
+// This will help us connect to the database
 const dbo = require("../db/conn");
 
 // This section will help you get a list of all the records.
 recordRoutes.route("/listings").get(async function (req, res) {
- // Get records
+  // Get records
 });
 
 // This section will help you create a new record.
