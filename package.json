@@ -1,0 +1,22 @@
+{
+    "name": "mongodb-express-rest-api",
+    "version": "1.0.0",
+    "description": "Sample project for the article on MongoDB and Express.js web REST API tutorial",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mongodb-developer/mongodb-express-rest-api-example.git"
+    },
+    "keywords": [
+        "mongodb",
+        "node",
+        "express",
+        "atlas",
+        "react"
+    ],
+    "author": "Pavel Duchovny",
+    "license": "Apache 2.0",
+    "bugs": {
+        "url": "https://github.com/mongodb-developer/mongodb-express-rest-api-example/issues"
+    },
+    "homepage": "https://github.com/mongodb-developer/mongodb-express-rest-api-example#readme"
+}
