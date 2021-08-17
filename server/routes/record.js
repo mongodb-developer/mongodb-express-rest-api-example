@@ -5,21 +5,21 @@ const express = require("express");
 // The router will be added as a middleware and will take control of requests starting with path /listings.
 const recordRoutes = express.Router();
 
-//This will help us connect to the database
+// This will help us connect to the database
 const dbo = require("../db/conn");
 
 // This section will help you get a list of all the records.
-recordRoutes.route("/listings").get(async function (req, res) {
-  let db_connect = dbo.getDb("sample_airbnb");
-  db_connect
+recordRoutes.route("/listings").get(async function (_req, res) {
+  const dbConnect = dbo.getDb("sample_airbnb");
+
+  dbConnect
     .collection("listingsAndReviews")
-    .find({}).limit(50)
+    .find({})
+    .limit(50)
     .toArray(function (err, result) {
-      if (err)  { res.status(400); 
-                  res.send("Error fetching lisings!"); }
-      else
-      {
-        
+      if (err) {
+        res.status(400).send("Error fetching listings!");
+      } else {
         res.json(result);
       }
     });
@@ -27,52 +27,61 @@ recordRoutes.route("/listings").get(async function (req, res) {
 
 // This section will help you create a new record.
 recordRoutes.route("/listings/recordSwipe").post(function (req, res) {
-  let db_connect = dbo.getDb("sample_airbnb");
-  let myobj = {
-   listing_id : req.body.id,
-   last_modified : new Date(),
-   session_id : req.body.session_id,
-   direction : req.body.direction
+  const dbConnect = dbo.getDb("sample_airbnb");
+  const matchDocument = {
+    listing_id: req.body.id,
+    last_modified: new Date(),
+    session_id: req.body.session_id,
+    direction: req.body.direction
   };
-  db_connect.collection("matches").insertOne(myobj, function (err, res) {
-    if (err)  { res.status(400); 
-      res.send("Error insert matches!"); }
-  });
+
+  dbConnect
+    .collection("matches")
+    .insertOne(matchDocument, function (err, result) {
+      if (err) {
+        res.status(400).send("Error inserting matches!");
+      } else {
+        console.log(`Added a new match with id ${result.insertedId}`);
+        res.status(204).send();
+      }
+    });
 });
 
 // This section will help you update a record by id.
 recordRoutes.route("/listings/updateLike").post(function (req, res) {
-  let db_connect = dbo.getDb("sample_airbnb");
-  let myquery = { _id: req.body.id };
-  let newvalues = {
+  const dbConnect = dbo.getDb("sample_airbnb");
+  const listingQuery = { _id: req.body.id };
+  const updates = {
     $inc: {
-      likes : 1
+      likes: 1
     }
   };
-  db_connect
+
+  dbConnect
     .collection("listingsAndReviews")
-    .updateOne(myquery, newvalues, function (err, res) {
-      if (err)  { res.status(400); 
-        res.send("Error insert matches!"); }
-    else
-    {
-      console.log("1 document updated");
-    }
+    .updateOne(listingQuery, updates, function (err, _result) {
+      if (err) {
+        res.status(400).send(`Error updating likes on listing with id ${listingQuery.id}!`);
+      } else {
+        console.log("1 document updated");
+      }
     });
 });
 
-// This section will help you delete a record
+// This section will help you delete a record.
 recordRoutes.route("/listings/delete/:id").delete((req, res) => {
-  let db_connect = dbo.getDb("sample_airbnb");
-  var myquery = { listing_id: req.body.id };
-  db_connect.collection("listingsAndReviews").deleteOne(myquery, function (err, obj) {
-  if (err)  { res.status(400); 
-      res.send("Error insert matches!"); }
-  else
-  {
-    console.log("1 document deleted");
-  }
-  });
+  const dbConnect = dbo.getDb("sample_airbnb");
+  const listingQuery = { listing_id: req.body.id };
+
+  dbConnect
+    .collection("listingsAndReviews")
+    .deleteOne(listingQuery, function (err, _result) {
+      if (err) {
+        res.status(400).send(`Error deleting listing with id ${listingQuery.listing_id}!`);
+      } else {
+        console.log("1 document deleted");
+      }
+    });
 });
 
 module.exports = recordRoutes;
