@@ -24,15 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a server script
-        run: cd server && npm install &&  npm start 
-        wait-on: 'http://localhost:5000'
-
-      - name: Run a one-line script
-        run: cd app/listings && npm install && npm start
-        wait-on: 'http://localhost:3000'
-
-      - name: Cypress run with env
-        uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          start: |
+            (cd server && npm install && npm start)
+            (cd app/listings && npm install && npm start)
+          wait-on: 'http://localhost:5000'
+        
