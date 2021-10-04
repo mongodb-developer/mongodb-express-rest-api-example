@@ -24,11 +24,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+
+      - name: Setup servers
+        run : |
+          (cd server && npm install)
+          (cd app/listings && npm install)
+
       - uses: cypress-io/github-action@v2
         with:
           start: |
-            (cd server && npm install && npm start)
-            (cd app/listings && npm install && npm start)
+            (cd server && npm start &)
+            (cd app/listings && npm start &)
           wait-on: 'http://localhost:5000'
           working-directory: app/listings
         
