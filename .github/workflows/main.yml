@@ -27,10 +27,12 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a server script
-        run: cd server && npm install && nohup npm start 2>&1 &
+        run: cd server && npm install &&  npm start 
+        wait-on: 'http://localhost:5000'
 
       - name: Run a one-line script
-        run: cd app/listings && npm install && nohup npm start 2>&1 &
+        run: cd app/listings && npm install && npm start
+        wait-on: 'http://localhost:3000'
 
       - name: Cypress run with env
         uses: cypress-io/github-action@v2
