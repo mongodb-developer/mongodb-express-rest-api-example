@@ -18,21 +18,31 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Setup servers
-        run : |
-          (cd server && npm install)
-          (cd app/listings && npm install)
-
-      - uses: cypress-io/github-action@v2
+      - name: Install server npm packages
+        uses: bahmutov/npm-install@v1
         with:
-          start: npm start &
-          wait-on: 'http://localhost:3000'
+          working-directory: server
+
+      - name: Install app/listings npm packages
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: app/listings
+
+      - name: Start server in the background
+        run: (cd server && npm start &)
+
+      - name: Start React app in the background
+        run: (cd app/listings && npm start &)
+
+      - name: Install Cypress and run tests
+        uses: cypress-io/github-action@v2
+        with:
           working-directory: app/listings
         
