@@ -30,4 +30,5 @@ jobs:
             (cd server && npm install && npm start)
             (cd app/listings && npm install && npm start)
           wait-on: 'http://localhost:5000'
+          working-directory: app/listings
         
