@@ -26,6 +26,11 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: cd app/listings && npm install && npm start
+      - name: Run a server script
+        run: cd server && npm install && nohup npm start 2>&1 &
 
+      - name: Run a one-line script
+        run: cd app/listings && npm install && nohup npm start 2>&1 &
+
+      - name: Cypress run with env
+        uses: cypress-io/github-action@v2
