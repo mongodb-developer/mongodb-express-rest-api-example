@@ -32,9 +32,7 @@ jobs:
 
       - uses: cypress-io/github-action@v2
         with:
-          start: |
-            (cd server && npm start &)
-            (cd app/listings && npm start &)
-          wait-on: 'http://localhost:5000'
+          start: npm start &
+          wait-on: 'http://localhost:3000'
           working-directory: app/listings
         
