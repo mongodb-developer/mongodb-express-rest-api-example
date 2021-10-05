@@ -9,7 +9,7 @@
     "axios": "^0.21.1",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^1.1.5",
     "react-tinder-card": "^1.4.0",
     "styled-components": "^5.3.0",
     "uuid": "^8.3.2",

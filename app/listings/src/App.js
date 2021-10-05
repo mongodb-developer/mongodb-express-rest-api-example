@@ -1,7 +1,7 @@
 import './App.css';
 import TinderCard from 'react-tinder-card'
 import axios from 'axios';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { v4 as uuid } from 'uuid';
 
 class App extends Component {
