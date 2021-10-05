@@ -38,7 +38,7 @@ jobs:
       - name: Start server in the background
         env: 
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
-        run: (cd server && echo "ATLAS_URI=${ATLAS_URI} > config.env"  && npm start &)
+        run: (cd server && echo "ATLAS_URI=$ATLAS_URI" > config.env  && npm start &)
 
       - name: Start React app in the background
         run: (cd app/listings && npm start &)
