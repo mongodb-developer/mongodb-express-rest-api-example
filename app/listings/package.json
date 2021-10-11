@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/ cypress/",
-    "format": "prettier --single-quote --check src/ cypress/"
+    "format": "prettier --single-quote --check src/ cypress/",
+    "prepare": "cd ../../ && husky install app/listings/.husky"
   },
   "eslintConfig": {
     "extends": [
