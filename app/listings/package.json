@@ -15,16 +15,26 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
+  "devDependencies": {
+    "cypress": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.0",
+    "prettier": "^2.4.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src/ cypress/",
+    "format": "prettier --single-quote --check src/ cypress/",
+    "prepare": "cd ../../ && husky install app/listings/.husky"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -39,7 +49,15 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "cypress": "^8.5.0"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "{src,cypress}/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --single-quote --write",
+      "eslint --fix"
+    ]
   }
 }

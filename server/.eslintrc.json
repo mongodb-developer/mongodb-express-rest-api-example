@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        // Ignore arguments starting with _
+        "argsIgnorePattern": "^_"
+      }
+    ]
+  },
+  "extends": "eslint:recommended"
+}

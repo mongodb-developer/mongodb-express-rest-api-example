@@ -1,5 +1,4 @@
-
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require('mongodb');
 const connectionString = process.env.ATLAS_URI;
 const client = new MongoClient(connectionString, {
   useNewUrlParser: true,
@@ -15,8 +14,8 @@ module.exports = {
         return callback(err);
       }
 
-      dbConnection = db.db("sample_airbnb");
-      console.log("Successfully connected to MongoDB.");
+      dbConnection = db.db('sample_airbnb');
+      console.log('Successfully connected to MongoDB.');
 
       return callback();
     });
