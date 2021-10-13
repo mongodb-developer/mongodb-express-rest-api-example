@@ -28,7 +28,7 @@
     }
   },
   "lint-staged": {
-    "!(node_modules/**/*)/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+    "*.js": [
       "prettier --single-quote --write",
       "eslint --fix"
     ]
