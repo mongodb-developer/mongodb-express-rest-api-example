@@ -1,6 +1,6 @@
-# mongodb-express-rest-api-example
+# MongoDB and Express.js REST API sample application
 
-Example for the article on MongoDB and Express JS web REST API tutorial
+This repository contains the sample application for the [MongoDB and Express.js REST API tutorial](https://www.mongodb.com/languages/express-mongodb-rest-api-tutorial).
 
 ## How To Run
 
