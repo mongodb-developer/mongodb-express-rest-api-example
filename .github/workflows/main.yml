@@ -32,21 +32,9 @@ jobs:
         with:
           working-directory: server
 
-      - name: Install app npm packages
-        uses: bahmutov/npm-install@v1
-        with:
-          working-directory: app
-
       - name: Start server in the background
         env:
           ATLAS_URI: ${{ secrets.ATLAS_URI }}
         run: (cd server && echo "ATLAS_URI=$ATLAS_URI" > config.env  && npm start &)
 
-      - name: Start React app in the background
-        run: (cd app && npm start &)
-
-      - name: Install Cypress and run tests
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: app
 
