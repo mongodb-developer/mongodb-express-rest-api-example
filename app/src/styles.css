@@ -1,0 +1,17 @@
+html {
+  font-family: "Euclid Circular A", "Akzidenz", Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: sans-serif;
+}

@@ -1,23 +1,16 @@
 import { MongoClient } from "mongodb";
-import dotenv from "dotenv";
 
-dotenv.config();
+const connectionString = process.env.ATLAS_URI || "";
 
-const connectionString = process.env.ATLAS_URI;
-
-const client = new MongoClient(connectionString, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const client = new MongoClient(connectionString);
 
 let conn;
 try {
   conn = await client.connect();
 } catch(e) {
   console.error(e);
-  process.exit();
 }
 
-let db = conn.db("sample_airbnb");
+let db = conn.db("sample_training");
 
 export default db;
