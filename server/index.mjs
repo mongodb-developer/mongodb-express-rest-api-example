@@ -9,6 +9,8 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Load the /posts routes
 app.use("/posts", posts);
 
 // Global error handling
