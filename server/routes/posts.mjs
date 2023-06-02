@@ -6,11 +6,11 @@ const router = express.Router();
 
 // Get a list of 50 posts
 router.get("/", async (req, res) => {
-  let collection = await db.collection("posts");
+  let collection = await db.collection("messages");
   let results = await collection.find({})
     .limit(50)
     .toArray();
-
+  console.log("This endpoint is being hit.");
   res.send(results).status(200);
 });
 
